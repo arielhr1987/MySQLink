@@ -3,4 +3,4 @@ MySQLink
 
 The ExtJS and PHP tool for admin your MySQL databases.
 
-This app is currently on development... 
+This app is currently under development... if u have any question or suggestion you can contact me to mail email: arielhr1987@gmail.com
