@@ -1,0 +1,105 @@
+.CodeMirror {
+    background: white;
+    font-family: monospace;
+    font-size: 1.1em;
+    line-height: 1.1em;
+    cursor: text;
+    height: 100%;
+    width: 100%;
+}
+
+.CodeMirror-gutter {
+    cursor: default;
+    z-index: auto;
+}
+
+.CodeMirror-completions {
+    z-index: 9999;
+}
+
+.CodeMirror-scroll {
+    height: 100%;
+}
+
+.allBorder {
+    border-bottom-width: 1px;
+
+}
+
+/*Highlight current line*/
+.CodeMirror-activeline {
+    background: #e8f2ff !important;
+}
+
+/*Highlight selection matches*/
+span.CodeMirror-matchhighlight {
+    background: #e9e9e9
+}
+
+.CodeMirror-focused span.CodeMirror-matchhighlight {
+    background: #e7e4ff !important;
+
+}
+
+/*For autocomplete dataview*/
+.x-autocomplete-item-selected {
+    background-color: #DFE8F6;
+    cursor: pointer;
+
+}
+
+.x-combo-list-item-over {
+    background-color: #EFEFEF;
+    cursor: pointer;
+}
+
+/*For autocomplete select*/
+/*.autocomplete-option{
+    padding-left: 16px;
+    background-image: url("<?php echo $base_url?>resources/ux/class.gif");
+background-repeat: no-repeat;
+}*/
+.autocomplete {
+    background-color: #FFFFFF !important;
+    overflow: hidden;
+}
+
+/*.autocomplete > ul{
+    height: auto !important;
+}*/
+.autocomplete-list {
+    background-color: #FFFFFF !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /*left: 0px !important;
+    width: inherit;*/
+}
+
+.autocomplete-option {
+    padding-left: 20px;
+    padding-right: 20px;
+    background-repeat: no-repeat;
+    border: 1px transparent dotted !important;
+    cursor: default;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    font-size-adjust: none;
+    color: #000000;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: normal;
+    word-spacing: 0;
+    line-height: 18px;
+    text-align: start;
+    vertical-align: baseline;
+    direction: ltr;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+.autocomplete-option-selected {
+    background-color: #DFE8F6;
+    border-color: #A3BAE9 !important;
+}

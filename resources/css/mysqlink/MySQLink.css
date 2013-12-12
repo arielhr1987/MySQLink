@@ -1,0 +1,121 @@
+/* style rows on mouseover */
+.x-grid-row-over .x-grid-cell-inner {
+	font-weight: bold;
+} 
+.x-form-search-trigger-rtl {
+    background-image: url("../ext/ext-theme-classic/images/form/search-trigger-rtl.gif") !important;
+}
+.x-livesearch-match {
+    background-color: yellow;
+    font-weight: bold;
+}
+/*app as css*/
+.app-icon-server {
+    background-image: url("../../images/mysqlink/server.png") !important;
+}
+
+.app-icon-database {
+    background-image: url("../../images/mysqlink/database.png") !important;
+}
+
+.app-icon-view {
+    background-image: url("../../images/mysqlink/view.png") !important;
+}
+
+.app-icon-event {
+    background-image: url("../../images/mysqlink/event.png") !important;
+}
+
+.app-icon-table {
+    background-image: url("../../images/mysqlink/table.png") !important;
+}
+
+.app-icon-fk {
+    background-image: url("../../images/mysqlink/table_link.png") !important;
+}
+
+.app-icon-table-column {
+    background-image: url("../../images/mysqlink/table_select_column.png") !important;
+}
+
+.app-icon-table-index {
+    background-image: url("../../images/mysqlink/table_lightning.png") !important;
+}
+
+.app-icon-table-trigger {
+    background-image: url("../../images/mysqlink/trigger.png") !important;
+}
+
+.app-icon-procedure {
+    background-image: url("../../images/mysqlink/script_green.png") !important;
+}
+
+.app-icon-function {
+    background-image: url("../../images/mysqlink/script_red.png") !important;
+}
+
+.app-icon-redo {
+    background-image: url("../../images/mysqlink/arrow_redo.png") !important;
+}
+
+.app-icon-undo {
+    background-image: url("../../images/mysqlink/arrow_undo.png") !important;
+}
+
+.app-icon-run-script {
+    background-image: url("../../images/mysqlink/script_go.png") !important;
+}
+
+.app-icon-comment {
+    background-image: url("../../images/mysqlink/document_comments.png") !important;
+}
+
+.app-icon-uncomment {
+    background-image: url("../../images/mysqlink/document_comment_above.png") !important;
+}
+
+.app-icon-completition {
+    background-image: url("../../images/mysqlink/list.png") !important;
+}
+
+.app-icon-delete {
+    background-image: url("../../images/mysqlink/delete.png") !important;
+}
+
+.app-icon-add {
+    background-image: url("../../images/mysqlink/add.png") !important;
+}
+
+.app-icon-arrow-up {
+    background-image: url("../../images/mysqlink/arrow_up.png") !important;
+}
+
+.app-icon-arrow-down {
+    background-image: url("../../images/mysqlink/arrow_down.png") !important;
+}
+
+.app-icon-error {
+     background-image: url("../../images/mysqlink/exclamation.gif") !important;
+ }
+
+.app-icon-ok {
+    background-image: url("../../images/mysqlink/accept.png") !important;
+}
+
+.app-icon-server-monitor {
+    background-image: url("../../images/mysqlink/system_monitor.png") !important;
+}
+
+.app-icon-query-editor {
+    background-image: url("../../images/mysqlink/script_edit.png") !important;
+}
+
+.app-icon-server-tree {
+    background-image: url("../../images/mysqlink/node-tree.png") !important;
+}
+
+.app-icon-center-column-grid{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

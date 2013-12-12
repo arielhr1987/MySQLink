@@ -1,0 +1,6 @@
+<?php
+    /**
+     *
+     */
+
+    define('RESOURCES',         'resources');
