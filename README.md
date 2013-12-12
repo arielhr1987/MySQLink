@@ -1,4 +1,4 @@
 MySQLink
 ========
 
-The ExtJS and PHP tool for admin your MySQL databases
+The ExtJS and PHP tool for admin your MySQL databases.
