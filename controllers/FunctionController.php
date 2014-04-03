@@ -17,7 +17,7 @@
         }
 
         public function All(){
-            $result = $this->db->ListFunctions();
+            $result = $this->db->listFunctions(false);
             $arr = array();
             foreach($result as $res){
                 $arr[] = array(

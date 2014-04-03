@@ -12,7 +12,7 @@
             }
             $vars = $config[$host];
             $this->load->database($vars);
-            $dbs = $this->db->ListDatabases();
+            $dbs = $this->db->listDatabases();
             $dbs = json_encode($dbs);
             $this->load->view('Query/Index', array(
                     'dbs'        => $dbs,
@@ -41,7 +41,7 @@
             }
             //$res['msg'] = 'Query executed successfully';
             $res['msg'] = array('status' => 'OK', 'time' => date('d-m-Y h:i:s a'), 'msg' => 'Query executed successfully', 'duration' => '123');
-            $error      = $this->db->Error();
+            $error      = $this->db->error();
             if ($error['code']) {
                 //$res['msg'] = 'Error ' . $error['code'] . ' ' . $error['msg'] ;
                 $res['msg']['msg']    = 'Error ' . $error['code'] . ' ' . $error['msg'];

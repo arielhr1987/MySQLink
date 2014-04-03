@@ -17,7 +17,7 @@
         }
 
         public function All(){
-            $result = $this->db->ListProcedures();
+            $result = $this->db->ListProcedures(false);
             $arr = array();
             foreach($result as $res){
                 $arr[] = array('name' => $res["Name"], 'definer' => $res['Definer'], 'created' => $res['Created'], 'modified' => $res['Modified'], 'Security_type' => $res['Security_type'],'Comment' => $res['Comment']);

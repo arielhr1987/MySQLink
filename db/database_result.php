@@ -5,15 +5,19 @@
 
     abstract class DatabaseResult
     {
-        protected $link = null;
-        protected $result = null;
-        protected $currentRow = 0;
-        protected $numRows = 0;
+        public $link = null;
+        public $result = null;
+        public $resultArray = array();
+        public $resultObject = array();
+        public $fields = array();
+        public $currentRow = 0;
+        public $numRows = 0;
 
-        public function __construct($result){
+        public function __construct($result, $link = null){
             $this->result = $result;
+            $this->link = $link;
         }
-        public function ResultAll(){
+        /*public function ResultAll(){
 
         }
 
@@ -50,5 +54,38 @@
                 $meta[] = $row;
             };
             return $meta;
+        }*/
+        //-------------------------------------
+        public function resultArray()
+        {
+            if (count($this->resultArray) > 0)
+            {
+                return $this->resultArray;
+            }
+            $this->dataSeek(0);
+            while ($row = $this->fetchAssoc())
+            {
+                $this->resultArray[] = $row;
+            }
+            return $this->resultArray;
         }
+
+        public function resultObject()
+        {
+            if (count($this->resultObject) > 0)
+            {
+                return $this->resultObject;
+            }
+            $this->dataSeek(0);
+            while ($row = $this->fetchObject())
+            {
+                $this->resultObject[] = $row;
+            }
+            return $this->resultObject;
+        }
+
+        abstract public function fetchAssoc();
+        abstract public function fetchObject();
+        abstract public function dataSeek();
+        abstract public function fields();
     }

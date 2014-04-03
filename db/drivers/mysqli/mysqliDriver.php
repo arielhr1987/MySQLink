@@ -6,7 +6,21 @@
     class mysqliDriver extends DatabaseDriver
     {
 
-        public function Connect()
+        protected function dbConnect()
+        {
+            if ($this->port != '') {
+                return @mysqli_connect($this->host, $this->user, $this->pass, $this->db, $this->port);
+            } else {
+                return @mysqli_connect($this->host, $this->user, $this->pass, $this->db);
+            }
+        }
+
+        protected function execute($sql)
+        {
+            return @mysqli_query($this->link, $sql);
+        }
+
+        public function connect()
         {
             $this->link = @mysqli_connect($this->host, $this->user, $this->pass, $this->db);
             if (!$this->link) {
@@ -17,7 +31,7 @@
         }
 
 
-        public function ListDatabases()
+        /*public function listDatabases()
         {
             $result = $this->Query('SHOW DATABASES');
             $res    = array();
@@ -25,9 +39,9 @@
                 $res[] = $row[0];
             }
             return $res;
-        }
+        }*/
 
-        public function Query($query)
+        /*public function Query($query)
         {
             $result = @mysqli_query($this->link, $query);
             if (is_object($result)) {
@@ -35,13 +49,13 @@
                 $result  = new $rdriver ($result);
             }
             return $result;
-        }
+        }*/
 
         public function MultiQuery($query)
         {
-            $result  = array();
-            if ($res = @mysqli_multi_query($this->link, $query)) {                
-                $rdriver = $this->GetResultClass();
+            $result = array();
+            if ($res = @mysqli_multi_query($this->link, $query)) {
+                $rdriver = $this->getResultClass();
                 do {
                     if ($temp = mysqli_store_result($this->link)) {
                         $result[] = new $rdriver ($temp);
@@ -51,52 +65,7 @@
             return $result;
         }
 
-        public function ListTables()
-        {
-            $result = $this->Query("SHOW FULL TABLES WHERE Table_type <> 'VIEW'");
-            $res    = array();
-            while ($row = $result->Row()) {
-                $res[] = $row[0];
-            }
-            return $res;
-        }
-
-        public function ListViews()
-        {
-            $result = $this->Query("SHOW FULL TABLES WHERE Table_type = 'VIEW'");
-            $res    = array();
-            while ($row = $result->Row()) {
-                $res[] = $row[0];
-            }
-            return $res;
-        }
-
-        /*public function ListFunctions()
-        {
-            $result = $this->Query("SHOW FUNCTION STATUS WHERE Db = '$this->db'");
-            $res    = array();
-            while ($row = $result->Row()) {
-                $res[] = $row[1];
-            }
-            return $res;
-        }*/
-
-        public function ListProceduresName()
-        {
-            $result =  $this->ListProcedures();
-            $res    = array();
-            foreach ($result as $row) {
-                $res[] = $row["Name"];
-            }
-            return $res;
-        }
-
-        public function ListProcedures(){
-            $result = $this->Query("SHOW PROCEDURE STATUS WHERE Db = '$this->db'");
-            return $result->RowAll();
-        }
-
-        public function ListEvents()
+        /*public function listEvents($simple = false)
         {
             $result = $this->Query("SHOW EVENTS WHERE Db = '$this->db'");
             $res    = array();
@@ -104,10 +73,10 @@
                 $res[] = $row[1];
             }
             return $res;
-        }
+        }*/
 
 
-        public function ListFields($table)
+        /*public function listFields($table, $simple = false)
         {
             $result = $this->Query("SHOW COLUMNS FROM `$table`");
             $res    = array();
@@ -115,9 +84,9 @@
                 $res[] = $row['Field'];
             }
             return $res;
-        }
+        }*/
 
-        public function ListIndices($table)
+        /*public function listIndices($table, $simple = false)
         {
             $result = $this->Query("SHOW INDEX FROM `$table`");
             $res    = array();
@@ -125,40 +94,40 @@
                 $res[] = $row['Key_name'];
             }
             return $res;
-        }
+        }*/
 
-        public function ListTriggersName($table)
+       /* public function ListTriggersName($table)
         {
-            $result = $this->ListTriggers($table);
+            $result = $this->listTriggers($table, false);
             $res    = array();
-            foreach($result as $row){
+            foreach ($result as $row) {
                 $res[] = $row['Trigger'];
             }
             return $res;
-        }
-		
-		public function ListTriggers($table)
+        }*/
+
+        /*public function listTriggers($table, $simple = false)
         {
             $result = $this->Query("SHOW TRIGGERS WHERE `Table` = '$table'");
             return $result->RowAll();
-        }
-		
-		public function TriggerDefiniton($table, $name)
+        }*/
+
+        public function TriggerDefiniton($table, $name)
         {
             $result = $this->Query("SHOW TRIGGERS WHERE `Table` = '$table' AND `Trigger` = '$name'");
             $res    = array();
-            if($row = $result->Row()) {
+            if ($row = $result->Row()) {
                 $res = array(
-					"Timing" => $row["Timing"],
-					"Event"  => $row["Event"],
-					"Definer"=> $row["Definer"],
-					"Statement"=> $row["Statement"]
-				);
+                    "Timing"    => $row["Timing"],
+                    "Event"     => $row["Event"],
+                    "Definer"   => $row["Definer"],
+                    "Statement" => $row["Statement"]
+                );
             }
             return $res;
         }
 
-        public function ListForeignKeys($table)
+       /* public function listForeignKeys($table, $simple = false)
         {
             $result    = array();
             $statement = $this->Query("SHOW CREATE TABLE `" . $table . "`")->Row();
@@ -175,22 +144,23 @@
                 }
             }
             return $result;
-        }
+        }*/
 
-        public function Error()
+        public function error()
         {
-			$code = 0;
-			$msg ='';
-			if (@mysqli_connect_errno($this->link)) {
-				$code = mysqli_connect_errno($this->link);
-				$msg = mysqli_connect_error($this->link);
-			}else if (@mysqli_errno($this->link)) {
-				$code = @mysqli_errno($this->link);
-				$msg = @mysqli_error($this->link);
-			}
-			return array(
+            $code = 0;
+            $msg  = '';
+            if (@mysqli_connect_errno($this->link)) {
+                $code = mysqli_connect_errno($this->link);
+                $msg  = mysqli_connect_error($this->link);
+            } else if (@mysqli_errno($this->link)) {
+                $code = @mysqli_errno($this->link);
+                $msg  = @mysqli_error($this->link);
+            }
+            return array(
                 'code' => $code,
-                'msg' => $msg
+                'msg'  => $msg
             );
         }
+
     }

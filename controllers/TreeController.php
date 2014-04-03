@@ -16,14 +16,14 @@
                 case 0:
                 {
                     $config = $this->Config->config['config'];
-                    $result = $this->GenerateTreenode(array_keys($config),false,'app-icon-server');
+                    $result = $this->generateTreenode(array_keys($config),false,'app-icon-server');
                 };
                     break;
                 //Databases
                 case 1:
                 {
-                    $res    = $this->db->ListDatabases();
-                    $result = $this->GenerateTreenode($res,false, 'app-icon-database');
+                    $res    = $this->db->listDatabases();
+                    $result = $this->generateTreenode($res,false, 'app-icon-database');
                 };
                     break;
                 //Database Folders
@@ -45,36 +45,36 @@
                         //Tables in the database
                         case 'tables':
                         {
-                            $res    = $this->db->ListTables();
-                            $result = $this->GenerateTreenode($res, false ,'app-icon-table');
+                            $res    = $this->db->listTables();
+                            $result = $this->generateTreenode($res, false ,'app-icon-table');
                         };
                             break;
                         //Views
                         case 'views':
                         {
-                            $res    = $this->db->ListViews();
-                            $result = $this->GenerateTreenode($res,true, 'app-icon-view');
+                            $res    = $this->db->listViews();
+                            $result = $this->generateTreenode($res,true, 'app-icon-view');
                         };
                             break;
                         //Functions
                         case 'functions':
                         {
-                            $res    = $this->db->ListFunctions();
-                            $result = $this->GenerateTreenode($res, true, 'app-icon-function');
+                            $res    = $this->db->listFunctions(true);
+                            $result = $this->generateTreenode($res, true, 'app-icon-function');
                         };
                             break;
                         //Procedures
                         case 'procedures':
                         {
-                            $res    = $this->db->ListProceduresName();
-                            $result = $this->GenerateTreenode($res, true, 'app-icon-procedure');
+                            $res    = $this->db->listProcedures(true);
+                            $result = $this->generateTreenode($res, true, 'app-icon-procedure');
                         };
                             break;
                         //Events
                         case 'events':
                         {
-                            $res    = $this->db->ListEvents();
-                            $result = $this->GenerateTreenode($res, true, 'app-icon-event');
+                            $res    = $this->db->listEvents(true);
+                            $result = $this->generateTreenode($res, true, 'app-icon-event');
                         }
                     }
                 };
@@ -98,29 +98,29 @@
                         //Fields
                         case 'fields':
                         {
-                            $res    = $this->db->ListFields($node[3]);
-                            $result = $this->GenerateTreenode($res, true, 'app-icon-table-column');
+                            $res    = $this->db->listFields($node[3], true);
+                            $result = $this->generateTreenode($res, true, 'app-icon-table-column');
                         };
                             break;
                         //Indices
                         case 'indices':
                         {
-                            $res    = $this->db->ListIndices($node[3]);
-                            $result = $this->GenerateTreenode($res, true, 'app-icon-table-index');
+                            $res    = $this->db->listIndices($node[3], true);
+                            $result = $this->generateTreenode($res, true, 'app-icon-table-index');
                         };
                             break;
                         //Foreign keys
                         case 'fk':
                         {
-                            $res    = $this->db->ListForeignKeys($node[3]);
-                            $result = $this->GenerateTreenode($res, true , 'app-icon-fk');
+                            $res    = $this->db->listForeignKeys($node[3], false);
+                            $result = $this->generateTreenode($res, true , 'app-icon-fk');
                         };
                             break;
                         //Triggers
                         case 'triggers':
                         {
-                            $res    = $this->db->ListTriggersName($node[3]);
-                            $result = $this->GenerateTreenode($res, true, 'app-icon-table-trigger');
+                            $res    = $this->db->listTriggers($node[3], true);
+                            $result = $this->generateTreenode($res, true, 'app-icon-table-trigger');
                         };
                             break;
                     }
@@ -138,8 +138,11 @@
          * @param string $iconCls Apply a user defined icon. By default 'x-tree-icon'
          * @return array
          */
-        private function GenerateTreenode($array = array(), $leaf = false, $iconCls = 'x-tree-icon')
+        private function generateTreenode($array = array(), $leaf = false, $iconCls = 'x-tree-icon')
         {
+            if($array == false){
+                //Error
+            }
             $result = array();
             foreach ($array as $value) {
                 //$value = utf8_encode($value);
